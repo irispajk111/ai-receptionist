@@ -1,0 +1,35 @@
+{
+  "id": "client_001",
+  "businessName": "Luxe Hair Studio",
+  "businessType": "Hair Salon",
+  "receptionistName": "Alex",
+  "phone": "+1-555-000-0000",
+  "address": "123 Main St, Miami FL 33101",
+  "website": "https://luxehairstudio.com",
+  "voiceId": "21m00Tcm4TlvDq8ikWAM",
+  "hours": {
+    "Monday": { "open": "9:00 AM", "close": "7:00 PM" },
+    "Tuesday": { "open": "9:00 AM", "close": "7:00 PM" },
+    "Wednesday": { "open": "9:00 AM", "close": "7:00 PM" },
+    "Thursday": { "open": "9:00 AM", "close": "8:00 PM" },
+    "Friday": { "open": "9:00 AM", "close": "8:00 PM" },
+    "Saturday": { "open": "10:00 AM", "close": "6:00 PM" },
+    "Sunday": { "open": null, "close": null }
+  },
+  "services": [
+    { "name": "Haircut & Style", "description": "Cut, wash, and blowout", "price": 65 },
+    { "name": "Color — Full", "description": "Full single-process color", "price": 120 },
+    { "name": "Color — Highlights", "description": "Partial or full highlights", "price": 150 },
+    { "name": "Balayage", "description": "Hand-painted highlights", "price": 200 },
+    { "name": "Keratin Treatment", "description": "Smoothing treatment, lasts 3-4 months", "price": 250 },
+    { "name": "Blowout", "description": "Wash and blowdry only", "price": 45 }
+  ],
+  "discountPolicy": "We offer 15% off for first-time clients. Just mention it when booking!",
+  "urgentContact": null,
+  "emergencyProtocol": "For any medical emergency, please call 911.",
+  "calendarType": "google",
+  "calendarId": "GOOGLE_CALENDAR_ID_HERE",
+  "stripeCustomerId": "cus_STRIPE_ID_HERE",
+  "monthlyFee": 297,
+  "twilioPhoneNumber": "+1-555-000-0000"
+}
