@@ -1,10 +1,14 @@
 require("dotenv").config({ path: require("path").join(__dirname, "../.env") });
 const twilio = require("twilio");
 
-const client = twilio(process.env.TWILIO_ACCOUNT_SID, process.env.TWILIO_AUTH_TOKEN);
+let client;
+function getClient() {
+  if (!client) client = twilio(process.env.TWILIO_ACCOUNT_SID, process.env.TWILIO_AUTH_TOKEN);
+  return client;
+}
 
 async function sendSMS(to, body) {
-  return client.messages.create({
+  return getClient().messages.create({
     from: process.env.TWILIO_FROM_NUMBER,
     to,
     body,
