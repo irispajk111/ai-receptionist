@@ -8,6 +8,21 @@ const { bookCalendarSlot, getAvailableSlots } = require("../utils/calendar");
 
 app.get("/health", (req, res) => res.json({ status: "ok" }));
 
+// Trial signup — called from the website form
+app.post("/trial/signup", async (req, res) => {
+  try {
+    const lead = { ...req.body, id: `trial_${Date.now()}`, status: "pending", createdAt: new Date().toISOString() };
+    db.saveClient(lead);
+    console.log(`NEW TRIAL SIGNUP: ${lead.businessName} — ${lead.email} — ${lead.phone}`);
+    res.json({ ok: true });
+  } catch (e) {
+    res.json({ ok: true }); // always succeed so user sees confirmation
+  }
+});
+
+app.use((req, res, next) => { res.header("Access-Control-Allow-Origin", "*"); res.header("Access-Control-Allow-Headers", "Content-Type"); next(); });
+app.options("*", (req, res) => res.sendStatus(200));
+
 // Vapi sends events here during/after every call
 app.post("/webhook/vapi/:clientId", async (req, res) => {
   const { clientId } = req.params;

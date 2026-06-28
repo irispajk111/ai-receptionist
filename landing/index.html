@@ -16,6 +16,15 @@
     .nav-cta { background: #2563eb; color: #fff; padding: 10px 24px; border-radius: 8px; text-decoration: none; font-weight: 600; font-size: 15px; }
     .nav-cta:hover { background: #1d4ed8; }
 
+    /* DEMO WIDGET */
+    .demo-bar { background: #1a1a2e; color: #fff; text-align: center; padding: 14px 20px; font-size: 15px; }
+    .demo-bar strong { color: #60a5fa; }
+    .demo-btn { display: inline-flex; align-items: center; gap: 8px; background: #2563eb; color: #fff; border: none; padding: 10px 22px; border-radius: 8px; font-size: 15px; font-weight: 600; cursor: pointer; margin-left: 16px; vertical-align: middle; }
+    .demo-btn:hover { background: #1d4ed8; }
+    .demo-btn .dot { width: 8px; height: 8px; background: #4ade80; border-radius: 50%; animation: pulse 1.5s infinite; }
+    @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:0.4} }
+    #vapi-widget { position: fixed; bottom: 24px; right: 24px; z-index: 9999; }
+
     /* HERO */
     .hero { text-align: center; padding: 90px 20px 70px; background: linear-gradient(135deg, #eff6ff 0%, #fff 60%); }
     .badge { display: inline-block; background: #dbeafe; color: #2563eb; font-size: 13px; font-weight: 600; padding: 6px 16px; border-radius: 100px; margin-bottom: 24px; }
@@ -92,7 +101,7 @@
 <!-- NAV -->
 <nav>
   <div class="logo">FrontDesk<span>AI</span></div>
-  <a href="#book" class="nav-cta">Book Free Demo</a>
+  <a href="trial.html" class="nav-cta">Start Free Trial</a>
 </nav>
 
 <!-- HERO -->
@@ -231,6 +240,51 @@
 <footer>
   <p>© 2026 DentalAnswerAI &nbsp;·&nbsp; Calgary, Alberta &nbsp;·&nbsp; hello@dentalanswerai.site &nbsp;·&nbsp; dentalanswerai.site</p>
 </footer>
+
+<!-- Demo bar at top of page -->
+<script>
+  // Insert demo bar before nav
+  const demoBar = document.createElement('div');
+  demoBar.className = 'demo-bar';
+  demoBar.innerHTML = '<strong>Try it live right now</strong> — click to call our AI receptionist demo and hear exactly what yours will sound like &nbsp;<button class="demo-btn" onclick="startDemo()"><span class="dot"></span> Call Demo Now</button>';
+  document.body.insertBefore(demoBar, document.body.firstChild);
+</script>
+
+<!-- Vapi Web SDK -->
+<script>
+  var vapiInstance = null;
+  const DEMO_ASSISTANT_ID = "c5d4ca94-4b62-4f27-9b1b-65defaafddfe";
+  const VAPI_PUBLIC_KEY = "8c7c45f4-bacb-4e96-84f5-d23af6e53e60";
+
+  (function(d, t) {
+    var g = document.createElement(t), s = d.getElementsByTagName(t)[0];
+    g.src = "https://cdn.jsdelivr.net/gh/VapiAI/html-script-tag@latest/dist/assets/index.js";
+    g.defer = true; g.async = true; s.parentNode.insertBefore(g, s);
+    g.onload = function() {
+      vapiInstance = window.vapiSDK.run({
+        apiKey: VAPI_PUBLIC_KEY,
+        assistant: DEMO_ASSISTANT_ID,
+        config: {
+          position: "bottom-right",
+          offset: "40px",
+          width: "50px",
+          height: "50px",
+          idle: { color: "#2563eb", type: "round", icon: "https://unpkg.com/lucide-static@0.321.0/icons/phone.svg" },
+          loading: { color: "#2563eb", type: "round", icon: "https://unpkg.com/lucide-static@0.321.0/icons/loader-2.svg" },
+          active: { color: "#ef4444", type: "round", icon: "https://unpkg.com/lucide-static@0.321.0/icons/phone-off.svg" },
+        },
+      });
+    };
+  })(document, "script");
+
+  function startDemo() {
+    if (vapiInstance) {
+      vapiInstance.start(DEMO_ASSISTANT_ID);
+    } else {
+      alert("Loading demo... please try again in a moment.");
+    }
+  }
+</script>
 
 </body>
 </html>
