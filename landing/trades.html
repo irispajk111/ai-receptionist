@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Trades Answer AI — Never Miss Another Service Call</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; color: #1a1a2e; background: #fff; }
+
+    /* Demo bar */
+    .demo-bar { background: #f97316; color: #fff; text-align: center; padding: 14px 20px; font-size: 15px; font-weight: 600; }
+    .demo-bar a { color: #fff; text-decoration: underline; cursor: pointer; margin-left: 10px; }
+
+    /* Nav */
+    nav { display: flex; justify-content: space-between; align-items: center; padding: 18px 60px; border-bottom: 1px solid #f0f0f0; }
+    .logo { font-size: 22px; font-weight: 800; color: #f97316; }
+    .logo span { color: #1a1a2e; }
+    .nav-links { display: flex; align-items: center; gap: 32px; }
+    .nav-links a { text-decoration: none; color: #6b7280; font-size: 15px; }
+    .nav-cta { background: #f97316; color: #fff !important; padding: 10px 22px; border-radius: 8px; font-weight: 700 !important; }
+
+    /* Hero */
+    .hero { max-width: 900px; margin: 80px auto; padding: 0 20px; text-align: center; }
+    .badge { display: inline-block; background: #fff7ed; color: #f97316; font-size: 13px; font-weight: 700; padding: 6px 16px; border-radius: 100px; margin-bottom: 24px; border: 1px solid #fed7aa; }
+    h1 { font-size: 58px; font-weight: 900; line-height: 1.05; letter-spacing: -1.5px; margin-bottom: 24px; }
+    h1 span { color: #f97316; }
+    .hero-sub { font-size: 20px; color: #6b7280; line-height: 1.6; max-width: 620px; margin: 0 auto 40px; }
+    .hero-btns { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; }
+    .btn-primary { background: #f97316; color: #fff; padding: 16px 36px; border-radius: 12px; font-size: 17px; font-weight: 700; text-decoration: none; }
+    .btn-secondary { background: #fff; color: #1a1a2e; padding: 16px 36px; border-radius: 12px; font-size: 17px; font-weight: 600; text-decoration: none; border: 2px solid #e5e7eb; }
+    .hero-note { margin-top: 16px; font-size: 13px; color: #9ca3af; }
+
+    /* Pain section */
+    .pain { background: #1a1a2e; color: #fff; padding: 80px 20px; text-align: center; }
+    .pain h2 { font-size: 38px; font-weight: 800; margin-bottom: 16px; }
+    .pain p { font-size: 18px; color: #9ca3af; max-width: 600px; margin: 0 auto 60px; }
+    .pain-cards { display: flex; gap: 24px; justify-content: center; flex-wrap: wrap; max-width: 900px; margin: 0 auto; }
+    .pain-card { background: #ffffff0f; border: 1px solid #ffffff1a; border-radius: 16px; padding: 32px 28px; flex: 1; min-width: 220px; max-width: 260px; text-align: left; }
+    .pain-icon { font-size: 32px; margin-bottom: 16px; }
+    .pain-card h3 { font-size: 18px; font-weight: 700; margin-bottom: 8px; }
+    .pain-card p { font-size: 14px; color: #9ca3af; line-height: 1.6; }
+
+    /* How it works */
+    .how { padding: 80px 20px; max-width: 900px; margin: 0 auto; text-align: center; }
+    .how h2 { font-size: 38px; font-weight: 800; margin-bottom: 16px; }
+    .how p { font-size: 18px; color: #6b7280; margin-bottom: 60px; }
+    .steps { display: flex; gap: 32px; justify-content: center; flex-wrap: wrap; }
+    .step { flex: 1; min-width: 200px; max-width: 240px; text-align: left; }
+    .step-num { width: 40px; height: 40px; background: #fff7ed; color: #f97316; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 16px; margin-bottom: 16px; }
+    .step h3 { font-size: 17px; font-weight: 700; margin-bottom: 8px; }
+    .step p { font-size: 14px; color: #6b7280; line-height: 1.6; }
+
+    /* ROI */
+    .roi { background: #fff7ed; padding: 80px 20px; text-align: center; }
+    .roi h2 { font-size: 38px; font-weight: 800; margin-bottom: 16px; }
+    .roi p { font-size: 18px; color: #6b7280; margin-bottom: 48px; }
+    .roi-numbers { display: flex; gap: 32px; justify-content: center; flex-wrap: wrap; max-width: 800px; margin: 0 auto; }
+    .roi-card { background: #fff; border-radius: 16px; padding: 32px 24px; flex: 1; min-width: 180px; box-shadow: 0 2px 20px rgba(0,0,0,0.06); }
+    .roi-card .number { font-size: 42px; font-weight: 900; color: #f97316; margin-bottom: 8px; }
+    .roi-card p { font-size: 14px; color: #6b7280; }
+
+    /* Pricing */
+    .pricing { padding: 80px 20px; max-width: 800px; margin: 0 auto; text-align: center; }
+    .pricing h2 { font-size: 38px; font-weight: 800; margin-bottom: 16px; }
+    .pricing p { font-size: 18px; color: #6b7280; margin-bottom: 48px; }
+    .pricing-cards { display: flex; gap: 24px; justify-content: center; flex-wrap: wrap; }
+    .pricing-card { border: 2px solid #e5e7eb; border-radius: 20px; padding: 40px 32px; flex: 1; min-width: 260px; max-width: 320px; text-align: left; }
+    .pricing-card.featured { border-color: #f97316; position: relative; }
+    .featured-tag { position: absolute; top: -14px; left: 50%; transform: translateX(-50%); background: #f97316; color: #fff; font-size: 12px; font-weight: 700; padding: 4px 16px; border-radius: 100px; white-space: nowrap; }
+    .plan-name { font-size: 14px; font-weight: 700; color: #6b7280; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 8px; }
+    .plan-price { font-size: 48px; font-weight: 900; color: #1a1a2e; margin-bottom: 4px; }
+    .plan-price span { font-size: 18px; font-weight: 500; color: #6b7280; }
+    .plan-desc { font-size: 14px; color: #6b7280; margin-bottom: 24px; }
+    .plan-features { list-style: none; margin-bottom: 32px; }
+    .plan-features li { font-size: 14px; color: #374151; padding: 6px 0; border-bottom: 1px solid #f3f4f6; display: flex; gap: 8px; }
+    .plan-features li:before { content: "✓"; color: #f97316; font-weight: 700; }
+    .plan-btn { display: block; background: #f97316; color: #fff; text-align: center; padding: 14px; border-radius: 10px; font-weight: 700; text-decoration: none; font-size: 15px; }
+    .plan-btn.outline { background: #fff; color: #1a1a2e; border: 2px solid #e5e7eb; }
+
+    /* CTA */
+    .cta { background: #f97316; color: #fff; padding: 80px 20px; text-align: center; }
+    .cta h2 { font-size: 42px; font-weight: 900; margin-bottom: 16px; }
+    .cta p { font-size: 18px; opacity: 0.9; margin-bottom: 40px; }
+    .cta .btn { background: #fff; color: #f97316; padding: 18px 40px; border-radius: 12px; font-size: 18px; font-weight: 800; text-decoration: none; display: inline-block; }
+
+    /* Footer */
+    footer { background: #1a1a2e; color: #6b7280; padding: 40px 60px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px; }
+    footer a { color: #6b7280; text-decoration: none; }
+    .footer-logo { font-size: 18px; font-weight: 800; color: #fff; }
+
+    @media (max-width: 640px) {
+      nav { padding: 16px 20px; }
+      h1 { font-size: 36px; }
+      .nav-links a:not(.nav-cta) { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- Demo bar -->
+<div class="demo-bar">
+  🔥 Hear what your callers would hear — live AI demo right now.
+  <a onclick="startDemo()">Call the Demo →</a>
+</div>
+
+<!-- Nav -->
+<nav>
+  <div class="logo">Trades Answer<span>AI</span></div>
+  <div class="nav-links">
+    <a href="#how">How It Works</a>
+    <a href="#pricing">Pricing</a>
+    <a href="mailto:hello@tradesanswerai.site">Contact</a>
+    <a href="trades-trial.html" class="nav-cta">Start Free Trial</a>
+  </div>
+</nav>
+
+<!-- Hero -->
+<section class="hero">
+  <div class="badge">Built for HVAC · Plumbing · Electrical · Roofing</div>
+  <h1>Your trades business<br/><span>never misses</span><br/>another call.</h1>
+  <p class="hero-sub">An AI dispatcher answers every call, 24/7 — books jobs, handles emergencies, and responds in under 3 seconds. Even at 2am on a Sunday.</p>
+  <div class="hero-btns">
+    <a href="trades-trial.html" class="btn-primary">Start Free 14-Day Trial</a>
+    <a onclick="startDemo()" class="btn-secondary" style="cursor:pointer;">🎧 Hear the AI Live</a>
+  </div>
+  <p class="hero-note">No credit card. Setup in 48 hours. Cancel anytime.</p>
+</section>
+
+<!-- Pain -->
+<section class="pain">
+  <h2>Every missed call is a job going to your competitor.</h2>
+  <p>Trades businesses miss 40–60% of calls. Each one is $500 to $3,000 out the door.</p>
+  <div class="pain-cards">
+    <div class="pain-card">
+      <div class="pain-icon">🌙</div>
+      <h3>After-Hours Emergencies</h3>
+      <p>No heat at midnight. Burst pipe on Sunday. The customer calls whoever answers first — that should be you.</p>
+    </div>
+    <div class="pain-card">
+      <div class="pain-icon">🔧</div>
+      <h3>On The Job All Day</h3>
+      <p>You can't be under a sink and on the phone at the same time. Missed calls become your competitor's jobs.</p>
+    </div>
+    <div class="pain-card">
+      <div class="pain-icon">📞</div>
+      <h3>Voicemail = Lost Jobs</h3>
+      <p>74% of callers don't leave a voicemail. They hang up and call the next number on Google.</p>
+    </div>
+    <div class="pain-card">
+      <div class="pain-icon">💸</div>
+      <h3>Hiring a Receptionist</h3>
+      <p>$3,500/month for someone who still can't work nights, weekends, or holidays.</p>
+    </div>
+  </div>
+</section>
+
+<!-- How it works -->
+<section class="how" id="how">
+  <h2>How it works</h2>
+  <p>We set everything up. You just start getting booked jobs.</p>
+  <div class="steps">
+    <div class="step">
+      <div class="step-num">1</div>
+      <h3>Tell us about your business</h3>
+      <p>Services, hours, service area, pricing. Takes 5 minutes. We handle the rest.</p>
+    </div>
+    <div class="step">
+      <div class="step-num">2</div>
+      <h3>We build your AI dispatcher</h3>
+      <p>Custom-trained on your business. Knows your services, your prices, your area. Live within 48 hours.</p>
+    </div>
+    <div class="step">
+      <div class="step-num">3</div>
+      <h3>Forward your calls</h3>
+      <p>Takes 60 seconds to set up. Your AI answers every call instantly, around the clock.</p>
+    </div>
+    <div class="step">
+      <div class="step-num">4</div>
+      <h3>Jobs booked automatically</h3>
+      <p>You get a text with every new booking. Show up and do the work. That's it.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ROI -->
+<section class="roi">
+  <h2>The math is simple.</h2>
+  <p>One saved emergency call pays for months of service.</p>
+  <div class="roi-numbers">
+    <div class="roi-card">
+      <div class="number">$2,400</div>
+      <p>Average value of an HVAC emergency call</p>
+    </div>
+    <div class="roi-card">
+      <div class="number">74%</div>
+      <p>Of callers who won't leave a voicemail</p>
+    </div>
+    <div class="roi-card">
+      <div class="number">24/7</div>
+      <p>Coverage including nights, weekends, holidays</p>
+    </div>
+    <div class="roi-card">
+      <div class="number">3 sec</div>
+      <p>Average time to answer every call</p>
+    </div>
+  </div>
+</section>
+
+<!-- Pricing -->
+<section class="pricing" id="pricing">
+  <h2>Simple, honest pricing.</h2>
+  <p>No setup fees. No contracts. Cancel anytime.</p>
+  <div class="pricing-cards">
+    <div class="pricing-card">
+      <div class="plan-name">Starter</div>
+      <div class="plan-price">$497<span>/mo</span></div>
+      <div class="plan-desc">Perfect for solo operators and small crews</div>
+      <ul class="plan-features">
+        <li>AI dispatcher answers all calls 24/7</li>
+        <li>Emergency call handling</li>
+        <li>Job booking via SMS confirmation</li>
+        <li>Up to 300 calls/month</li>
+        <li>Custom trained on your business</li>
+        <li>Setup in 48 hours</li>
+      </ul>
+      <a href="trades-trial.html" class="plan-btn outline">Start Free Trial</a>
+    </div>
+    <div class="pricing-card featured">
+      <div class="featured-tag">Most Popular</div>
+      <div class="plan-name">Pro</div>
+      <div class="plan-price">$697<span>/mo</span></div>
+      <div class="plan-desc">For busy shops with 3–10 techs</div>
+      <ul class="plan-features">
+        <li>Everything in Starter</li>
+        <li>Unlimited calls</li>
+        <li>Multi-tech scheduling</li>
+        <li>SMS job confirmations to customers</li>
+        <li>Call recordings & summaries</li>
+        <li>Priority support</li>
+      </ul>
+      <a href="trades-trial.html" class="plan-btn">Start Free Trial</a>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta">
+  <h2>Ready to stop missing jobs?</h2>
+  <p>14-day free trial. We set everything up. You keep every job the AI books.</p>
+  <a href="trades-trial.html" class="btn">Start Free Trial — No Credit Card</a>
+</section>
+
+<!-- Footer -->
+<footer>
+  <div class="footer-logo">Trades Answer AI</div>
+  <div>© 2026 Trades Answer AI. All rights reserved.</div>
+  <div><a href="mailto:hello@tradesanswerai.site">hello@tradesanswerai.site</a></div>
+</footer>
+
+<!-- Vapi Web Widget -->
+<script>
+  var vapiInstance = null;
+  const assistant = "a7381607-d44c-4a53-9b0a-cf7724337ced";
+  const apiKey = "8c7c45f4-bacb-4e96-84f5-d23af6e53e60";
+  const buttonConfig = {
+    position: "bottom-right",
+    offset: "40px",
+    width: "50px",
+    height: "50px",
+    idle: { color: "#f97316", type: "pill", title: "Call Demo", subtitle: "Talk to our AI dispatcher", icon: "https://unpkg.com/lucide-static@0.321.0/icons/phone.svg" },
+    loading: { color: "#f97316", type: "pill", title: "Connecting...", subtitle: "Starting call", icon: "https://unpkg.com/lucide-static@0.321.0/icons/loader-2.svg" },
+    active: { color: "#22c55e", type: "pill", title: "Live Call", subtitle: "Talk to Alex now", icon: "https://unpkg.com/lucide-static@0.321.0/icons/phone.svg" },
+  };
+
+  (function (d, t) {
+    var g = document.createElement(t), s = d.getElementsByTagName(t)[0];
+    g.src = "https://cdn.jsdelivr.net/gh/VapiAI/html-script-tag@latest/dist/assets/index.js";
+    g.defer = true; g.async = true;
+    s.parentNode.insertBefore(g, s);
+    g.onload = function () {
+      vapiInstance = window.vapiSDK.run({ apiKey, assistant, config: buttonConfig });
+    };
+  })(document, "script");
+
+  function startDemo() {
+    if (vapiInstance) vapiInstance.start(assistant);
+  }
+</script>
+
+</body>
+</html>
