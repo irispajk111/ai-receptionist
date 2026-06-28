@@ -1,0 +1,155 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Start Free Trial â€” Trades Answer AI</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: #f9fafb; color: #1a1a2e; }
+    nav { display: flex; justify-content: space-between; align-items: center; padding: 20px 60px; background: #fff; border-bottom: 1px solid #f0f0f0; }
+    .logo { font-size: 22px; font-weight: 800; color: #f97316; }
+    .logo span { color: #1a1a2e; }
+    .container { max-width: 580px; margin: 60px auto; padding: 0 20px; }
+    .card { background: #fff; border-radius: 20px; padding: 48px; box-shadow: 0 4px 30px rgba(0,0,0,0.08); }
+    .badge { display: inline-block; background: #fff7ed; color: #f97316; font-size: 13px; font-weight: 600; padding: 6px 14px; border-radius: 100px; margin-bottom: 20px; border: 1px solid #fed7aa; }
+    h1 { font-size: 30px; font-weight: 800; margin-bottom: 8px; letter-spacing: -0.5px; }
+    .subtitle { color: #6b7280; font-size: 16px; margin-bottom: 36px; line-height: 1.5; }
+    .form-group { margin-bottom: 20px; }
+    label { display: block; font-size: 14px; font-weight: 600; margin-bottom: 6px; color: #374151; }
+    input, select, textarea { width: 100%; padding: 12px 16px; border: 1.5px solid #e5e7eb; border-radius: 10px; font-size: 15px; color: #1a1a2e; outline: none; transition: border-color 0.2s; }
+    input:focus, select:focus, textarea:focus { border-color: #f97316; }
+    textarea { height: 90px; resize: none; }
+    .row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+    .submit-btn { width: 100%; background: #f97316; color: #fff; padding: 16px; border: none; border-radius: 12px; font-size: 17px; font-weight: 700; cursor: pointer; margin-top: 8px; }
+    .submit-btn:hover { background: #ea6c0a; }
+    .terms { text-align: center; font-size: 13px; color: #9ca3af; margin-top: 16px; }
+    .success { display: none; text-align: center; padding: 40px 20px; }
+    .success h2 { font-size: 26px; font-weight: 800; margin-bottom: 12px; }
+    .success p { color: #6b7280; font-size: 16px; line-height: 1.6; }
+    .checkmark { font-size: 60px; margin-bottom: 20px; }
+  </style>
+</head>
+<body>
+
+<nav>
+  <div class="logo">Trades Answer<span>AI</span></div>
+  <a href="index.html" style="color:#6b7280; font-size:14px; text-decoration:none;">â† Back</a>
+</nav>
+
+<div class="container">
+  <div class="card">
+    <div id="form-section">
+      <div class="badge">14-Day Free Trial â€” No Credit Card</div>
+      <h1>Set up your AI dispatcher</h1>
+      <p class="subtitle">Fill in your business details and we'll have your AI dispatcher live within 48 hours. Cancel anytime before day 14 and pay nothing.</p>
+
+      <form id="trial-form">
+        <div class="form-group">
+          <label>Business Name *</label>
+          <input type="text" name="businessName" placeholder="e.g. Calgary Pro Plumbing" required />
+        </div>
+        <div class="row">
+          <div class="form-group">
+            <label>Your Name *</label>
+            <input type="text" name="ownerName" placeholder="Mike Johnson" required />
+          </div>
+          <div class="form-group">
+            <label>Your Email *</label>
+            <input type="email" name="email" placeholder="you@yourbusiness.com" required />
+          </div>
+        </div>
+        <div class="row">
+          <div class="form-group">
+            <label>Business Phone *</label>
+            <input type="tel" name="phone" placeholder="(403) 555-0000" required />
+          </div>
+          <div class="form-group">
+            <label>Trade Type *</label>
+            <select name="tradeType" required>
+              <option value="">Select...</option>
+              <option>HVAC</option>
+              <option>Plumbing</option>
+              <option>Electrical</option>
+              <option>Roofing</option>
+              <option>General Contracting</option>
+              <option>Drain Cleaning</option>
+              <option>Other</option>
+            </select>
+          </div>
+        </div>
+        <div class="form-group">
+          <label>Services & Pricing (list your main ones)</label>
+          <textarea name="services" placeholder="e.g. Furnace repair from $150, AC install from $2,500, drain cleaning $99, emergency callout $250..."></textarea>
+        </div>
+        <div class="form-group">
+          <label>Service Area</label>
+          <input type="text" name="address" placeholder="e.g. Calgary and surrounding area within 50km" />
+        </div>
+        <div class="row">
+          <div class="form-group">
+            <label>Regular Hours Start</label>
+            <select name="openTime">
+              <option>7:00 AM</option><option>7:30 AM</option><option selected>8:00 AM</option><option>8:30 AM</option><option>9:00 AM</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>Regular Hours End</label>
+            <select name="closeTime">
+              <option>4:00 PM</option><option>4:30 PM</option><option>5:00 PM</option><option selected>6:00 PM</option><option>7:00 PM</option><option>8:00 PM</option>
+            </select>
+          </div>
+        </div>
+        <div class="form-group">
+          <label>Do you offer 24/7 emergency service?</label>
+          <select name="emergency247">
+            <option value="yes">Yes â€” we take emergency calls anytime</option>
+            <option value="no">No â€” regular hours only</option>
+            <option value="partial">Partial â€” some emergencies only</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>Anything else your AI dispatcher should know?</label>
+          <textarea name="notes" placeholder="e.g. We don't do commercial work. We prefer cash or e-transfer. Parking always needed on site..."></textarea>
+        </div>
+        <button type="submit" class="submit-btn">Start My Free 14-Day Trial â†’</button>
+        <p class="terms">No credit card required. After 14 days, $497â€“$697/month. Cancel anytime.</p>
+      </form>
+    </div>
+
+    <div class="success" id="success-section">
+      <div class="checkmark">ðŸŽ‰</div>
+      <h2>You're in!</h2>
+      <p>We received your details and will have your AI dispatcher live within <strong>48 hours</strong>.<br/><br/>
+      You'll get an email at <span id="confirm-email"></span> with your dedicated phone number and a test call so you can hear it in action.<br/><br/>
+      Your 14-day trial starts the day it goes live. Every call answered. Every job booked.</p>
+    </div>
+  </div>
+</div>
+
+<script>
+document.getElementById('trial-form').addEventListener('submit', async function(e) {
+  e.preventDefault();
+  const btn = this.querySelector('.submit-btn');
+  btn.textContent = 'Submitting...';
+  btn.disabled = true;
+
+  const data = Object.fromEntries(new FormData(this));
+  data.product = 'trades';
+
+  try {
+    await fetch('https://ai-receptionist-production-57a6.up.railway.app/trial/signup', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(data),
+    });
+  } catch(e) {}
+
+  document.getElementById('confirm-email').textContent = data.email;
+  document.getElementById('form-section').style.display = 'none';
+  document.getElementById('success-section').style.display = 'block';
+});
+</script>
+
+</body>
+</html>

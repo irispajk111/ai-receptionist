@@ -5,6 +5,7 @@ app.use(express.json());
 const db = require("../db");
 const { sendSMS } = require("../utils/sms");
 const { bookCalendarSlot, getAvailableSlots } = require("../utils/calendar");
+const { autoOnboard } = require("./auto-onboard");
 
 app.get("/health", (req, res) => res.json({ status: "ok" }));
 
@@ -18,6 +19,8 @@ app.post("/trial/signup", async (req, res) => {
       "+14034397770",
       `NEW SIGNUP! ${lead.businessName}\nOwner: ${lead.ownerName}\nEmail: ${lead.email}\nPhone: ${lead.phone}`
     );
+    // Fire-and-forget: auto-onboard runs in background, doesn't block the response
+    autoOnboard(lead).catch((e) => console.error("[AUTO-ONBOARD ERROR]", e.message));
     res.json({ ok: true });
   } catch (e) {
     res.json({ ok: true }); // always succeed so user sees confirmation
