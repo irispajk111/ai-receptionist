@@ -27,6 +27,19 @@ app.post("/trial/signup", async (req, res) => {
   }
 });
 
+// Pronto waitlist signup
+app.post("/pronto/waitlist", async (req, res) => {
+  try {
+    const entry = { ...req.body, id: `pronto_${Date.now()}`, createdAt: new Date().toISOString() };
+    db.get("clients").push(entry).write();
+    console.log(`PRONTO WAITLIST: ${entry.name} — ${entry.email} — ${entry.serviceType}`);
+    await sendSMS("+14034397770", `PRONTO SIGNUP! ${entry.name || "Anonymous"}\nEmail: ${entry.email}\nService: ${entry.serviceType || "Not specified"}`);
+    res.json({ ok: true });
+  } catch (e) {
+    res.json({ ok: true });
+  }
+});
+
 app.use((req, res, next) => { res.header("Access-Control-Allow-Origin", "*"); res.header("Access-Control-Allow-Headers", "Content-Type"); next(); });
 app.options("*", (req, res) => res.sendStatus(200));
 

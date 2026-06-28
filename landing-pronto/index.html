@@ -1,0 +1,709 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Pronto — Your Service Business in Your Pocket</title>
+  <meta name="description" content="Stop losing clients to back-and-forth texts. Get a professional booking link in 5 minutes. Free for independent service workers." />
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --purple: #7c3aed;
+      --purple-dark: #5b21b6;
+      --purple-light: #ede9fe;
+      --purple-glow: rgba(124, 58, 237, 0.15);
+      --text: #1e1b4b;
+      --text-light: #6b7280;
+      --white: #ffffff;
+      --bg: #fafafa;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      color: var(--text);
+      background: var(--bg);
+      line-height: 1.6;
+    }
+
+    /* NAV */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      background: rgba(255,255,255,0.95);
+      backdrop-filter: blur(8px);
+      border-bottom: 1px solid #e5e7eb;
+      z-index: 100;
+      padding: 0 24px;
+    }
+    .nav-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 60px;
+    }
+    .logo {
+      font-size: 22px;
+      font-weight: 800;
+      color: var(--purple);
+      letter-spacing: -0.5px;
+    }
+    .nav-badge {
+      background: var(--purple-light);
+      color: var(--purple-dark);
+      font-size: 12px;
+      font-weight: 600;
+      padding: 4px 10px;
+      border-radius: 20px;
+    }
+
+    /* HERO */
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 100px 24px 60px;
+      background: linear-gradient(160deg, #f5f3ff 0%, #fafafa 60%);
+    }
+    .hero-inner { max-width: 720px; }
+
+    .hero-tag {
+      display: inline-block;
+      background: var(--purple-light);
+      color: var(--purple-dark);
+      font-size: 13px;
+      font-weight: 600;
+      padding: 6px 14px;
+      border-radius: 20px;
+      margin-bottom: 28px;
+      letter-spacing: 0.3px;
+    }
+
+    h1 {
+      font-size: clamp(38px, 6vw, 64px);
+      font-weight: 900;
+      line-height: 1.08;
+      letter-spacing: -2px;
+      margin-bottom: 22px;
+      color: var(--text);
+    }
+    h1 span { color: var(--purple); }
+
+    .hero-sub {
+      font-size: clamp(16px, 2.5vw, 20px);
+      color: var(--text-light);
+      max-width: 560px;
+      margin: 0 auto 44px;
+      line-height: 1.55;
+    }
+
+    /* WAITLIST FORM */
+    .waitlist-form {
+      background: white;
+      border: 1px solid #e5e7eb;
+      border-radius: 16px;
+      padding: 32px;
+      max-width: 480px;
+      margin: 0 auto;
+      box-shadow: 0 4px 24px rgba(0,0,0,0.06);
+    }
+    .waitlist-form h3 {
+      font-size: 18px;
+      font-weight: 700;
+      margin-bottom: 6px;
+    }
+    .waitlist-form p {
+      font-size: 14px;
+      color: var(--text-light);
+      margin-bottom: 20px;
+    }
+    .form-row { margin-bottom: 14px; }
+    .form-row label {
+      display: block;
+      font-size: 13px;
+      font-weight: 600;
+      margin-bottom: 5px;
+      color: var(--text);
+    }
+    .form-row input,
+    .form-row select {
+      width: 100%;
+      padding: 11px 14px;
+      border: 1.5px solid #e5e7eb;
+      border-radius: 8px;
+      font-size: 15px;
+      color: var(--text);
+      background: white;
+      transition: border-color 0.2s;
+      outline: none;
+    }
+    .form-row input:focus,
+    .form-row select:focus { border-color: var(--purple); }
+
+    .btn-join {
+      width: 100%;
+      background: var(--purple);
+      color: white;
+      border: none;
+      border-radius: 10px;
+      padding: 14px;
+      font-size: 16px;
+      font-weight: 700;
+      cursor: pointer;
+      margin-top: 8px;
+      transition: background 0.2s, transform 0.1s;
+    }
+    .btn-join:hover { background: var(--purple-dark); transform: translateY(-1px); }
+    .btn-join:active { transform: translateY(0); }
+    .form-note {
+      font-size: 12px;
+      color: var(--text-light);
+      text-align: center;
+      margin-top: 12px;
+    }
+
+    /* SUCCESS STATE */
+    .success-state {
+      display: none;
+      text-align: center;
+      padding: 20px 0;
+    }
+    .success-icon {
+      font-size: 48px;
+      margin-bottom: 12px;
+    }
+    .success-state h3 { font-size: 20px; font-weight: 700; margin-bottom: 8px; }
+    .success-state p { font-size: 14px; color: var(--text-light); }
+
+    /* SOCIAL PROOF */
+    .social-proof {
+      display: flex;
+      justify-content: center;
+      gap: 32px;
+      margin-top: 48px;
+      flex-wrap: wrap;
+    }
+    .proof-item { text-align: center; }
+    .proof-num {
+      font-size: 28px;
+      font-weight: 800;
+      color: var(--purple);
+    }
+    .proof-label {
+      font-size: 13px;
+      color: var(--text-light);
+      margin-top: 2px;
+    }
+
+    /* WHO IT'S FOR */
+    .section {
+      padding: 80px 24px;
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+    .section-label {
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: var(--purple);
+      margin-bottom: 12px;
+      text-align: center;
+    }
+    .section h2 {
+      font-size: clamp(28px, 4vw, 40px);
+      font-weight: 800;
+      letter-spacing: -1px;
+      text-align: center;
+      margin-bottom: 12px;
+    }
+    .section-sub {
+      text-align: center;
+      color: var(--text-light);
+      font-size: 17px;
+      margin-bottom: 48px;
+      max-width: 560px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    /* WORKER TYPE GRID */
+    .worker-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+      gap: 12px;
+      margin-bottom: 48px;
+    }
+    .worker-chip {
+      background: white;
+      border: 1.5px solid #e5e7eb;
+      border-radius: 12px;
+      padding: 16px 12px;
+      text-align: center;
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--text);
+      transition: border-color 0.2s, box-shadow 0.2s;
+    }
+    .worker-chip:hover {
+      border-color: var(--purple);
+      box-shadow: 0 0 0 3px var(--purple-glow);
+    }
+    .worker-chip .emoji { font-size: 24px; display: block; margin-bottom: 6px; }
+
+    /* FEATURES */
+    .features-bg { background: white; }
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 24px;
+    }
+    .feature-card {
+      background: var(--bg);
+      border: 1.5px solid #e5e7eb;
+      border-radius: 16px;
+      padding: 28px;
+      transition: border-color 0.2s, box-shadow 0.2s;
+    }
+    .feature-card:hover {
+      border-color: var(--purple);
+      box-shadow: 0 4px 20px var(--purple-glow);
+    }
+    .feature-icon {
+      width: 48px; height: 48px;
+      background: var(--purple-light);
+      border-radius: 12px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 22px;
+      margin-bottom: 16px;
+    }
+    .feature-card h3 { font-size: 17px; font-weight: 700; margin-bottom: 8px; }
+    .feature-card p { font-size: 14px; color: var(--text-light); line-height: 1.6; }
+
+    /* HOW IT WORKS */
+    .steps {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 32px;
+      position: relative;
+    }
+    .step { text-align: center; }
+    .step-num {
+      width: 40px; height: 40px;
+      background: var(--purple);
+      color: white;
+      border-radius: 50%;
+      font-weight: 800;
+      font-size: 18px;
+      display: flex; align-items: center; justify-content: center;
+      margin: 0 auto 16px;
+    }
+    .step h3 { font-size: 17px; font-weight: 700; margin-bottom: 8px; }
+    .step p { font-size: 14px; color: var(--text-light); }
+
+    /* PRICING */
+    .pricing-bg { background: linear-gradient(160deg, #f5f3ff 0%, #fafafa 100%); }
+    .pricing-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 20px;
+      max-width: 860px;
+      margin: 0 auto;
+    }
+    .pricing-card {
+      background: white;
+      border: 1.5px solid #e5e7eb;
+      border-radius: 16px;
+      padding: 28px;
+      position: relative;
+    }
+    .pricing-card.popular {
+      border-color: var(--purple);
+      box-shadow: 0 4px 24px var(--purple-glow);
+    }
+    .popular-badge {
+      position: absolute;
+      top: -12px; left: 50%; transform: translateX(-50%);
+      background: var(--purple);
+      color: white;
+      font-size: 12px;
+      font-weight: 700;
+      padding: 4px 14px;
+      border-radius: 20px;
+      white-space: nowrap;
+    }
+    .price-label { font-size: 13px; font-weight: 600; color: var(--text-light); margin-bottom: 8px; }
+    .price-amount {
+      font-size: 40px;
+      font-weight: 900;
+      letter-spacing: -1.5px;
+      color: var(--text);
+    }
+    .price-amount sup { font-size: 20px; vertical-align: top; margin-top: 8px; }
+    .price-amount sub { font-size: 14px; color: var(--text-light); font-weight: 400; }
+    .price-desc { font-size: 13px; color: var(--text-light); margin: 10px 0 20px; }
+    .price-features { list-style: none; }
+    .price-features li {
+      font-size: 14px;
+      padding: 7px 0;
+      border-top: 1px solid #f3f4f6;
+      display: flex; align-items: center; gap: 8px;
+    }
+    .price-features li::before { content: "✓"; color: var(--purple); font-weight: 700; }
+
+    /* FINAL CTA */
+    .cta-section {
+      background: var(--purple);
+      color: white;
+      text-align: center;
+      padding: 80px 24px;
+    }
+    .cta-section h2 {
+      font-size: clamp(28px, 4vw, 42px);
+      font-weight: 800;
+      letter-spacing: -1px;
+      margin-bottom: 16px;
+      color: white;
+    }
+    .cta-section p { font-size: 18px; opacity: 0.85; margin-bottom: 36px; }
+    .cta-form {
+      display: flex;
+      gap: 10px;
+      max-width: 420px;
+      margin: 0 auto;
+      flex-wrap: wrap;
+    }
+    .cta-form input {
+      flex: 1;
+      min-width: 200px;
+      padding: 14px 16px;
+      border-radius: 10px;
+      border: none;
+      font-size: 15px;
+      outline: none;
+    }
+    .btn-cta {
+      background: white;
+      color: var(--purple);
+      border: none;
+      border-radius: 10px;
+      padding: 14px 24px;
+      font-size: 15px;
+      font-weight: 700;
+      cursor: pointer;
+      white-space: nowrap;
+      transition: opacity 0.2s;
+    }
+    .btn-cta:hover { opacity: 0.92; }
+
+    /* FOOTER */
+    footer {
+      background: var(--text);
+      color: rgba(255,255,255,0.5);
+      text-align: center;
+      padding: 28px 24px;
+      font-size: 13px;
+    }
+    footer a { color: rgba(255,255,255,0.6); text-decoration: none; }
+
+    @media (max-width: 640px) {
+      .social-proof { gap: 20px; }
+      .waitlist-form { padding: 24px 20px; }
+      .cta-form { flex-direction: column; }
+      .cta-form input, .btn-cta { width: 100%; }
+    }
+  </style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-inner">
+    <div class="logo">Pronto</div>
+    <div class="nav-badge">Coming Soon — Join Waitlist</div>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-inner">
+    <div class="hero-tag">Built for independent service workers</div>
+    <h1>Your entire service business<br><span>in your pocket.</span></h1>
+    <p class="hero-sub">Stop losing clients to back-and-forth texts and no-shows. Get a professional booking link, automatic reminders, and deposit protection — in 5 minutes.</p>
+
+    <div class="waitlist-form" id="waitlist-form">
+      <h3>Get early access — free</h3>
+      <p>Be first when we launch. No credit card, no spam.</p>
+
+      <div class="form-row">
+        <label>Your name</label>
+        <input type="text" id="wl-name" placeholder="Sarah" />
+      </div>
+      <div class="form-row">
+        <label>Email address</label>
+        <input type="email" id="wl-email" placeholder="sarah@example.com" />
+      </div>
+      <div class="form-row">
+        <label>What do you do?</label>
+        <select id="wl-type">
+          <option value="">Select your service type...</option>
+          <option>Nail tech / esthetics</option>
+          <option>Hair stylist</option>
+          <option>Mobile massage / spa</option>
+          <option>House cleaner</option>
+          <option>Handyman / contractor</option>
+          <option>Dog groomer / walker</option>
+          <option>Personal trainer</option>
+          <option>Tutor / instructor</option>
+          <option>Babysitter / nanny</option>
+          <option>Photographer / videographer</option>
+          <option>Mover / hauler</option>
+          <option>Mechanic / auto detailing</option>
+          <option>Plumber / electrician / HVAC</option>
+          <option>Landscaper / snow removal</option>
+          <option>Other service</option>
+        </select>
+      </div>
+      <button class="btn-join" onclick="joinWaitlist()">Get Early Access →</button>
+      <p class="form-note">Free forever for the first 100 spots. No credit card needed.</p>
+    </div>
+
+    <div class="success-state" id="success-state">
+      <div class="success-icon">🎉</div>
+      <h3>You're on the list!</h3>
+      <p>We'll email you the moment Pronto launches.<br>Tell a fellow service worker — they'll thank you.</p>
+    </div>
+
+    <div class="social-proof">
+      <div class="proof-item">
+        <div class="proof-num">5 min</div>
+        <div class="proof-label">to set up your profile</div>
+      </div>
+      <div class="proof-item">
+        <div class="proof-num">$0</div>
+        <div class="proof-label">to start (free tier)</div>
+      </div>
+      <div class="proof-item">
+        <div class="proof-num">0%</div>
+        <div class="proof-label">commission ever</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- WHO IT'S FOR -->
+<section style="padding: 80px 24px; background: white;">
+  <div style="max-width: 1100px; margin: 0 auto;">
+    <div class="section-label">Who Pronto is for</div>
+    <h2>If you sell your time and skill,<br>Pronto is for you.</h2>
+    <p class="section-sub">Doesn't matter if you're brand new or been doing this 10 years. If you're taking bookings manually right now, Pronto fixes that.</p>
+    <div class="worker-grid">
+      <div class="worker-chip"><span class="emoji">💅</span>Nail Techs</div>
+      <div class="worker-chip"><span class="emoji">✂️</span>Hair Stylists</div>
+      <div class="worker-chip"><span class="emoji">🏠</span>Cleaners</div>
+      <div class="worker-chip"><span class="emoji">🔧</span>Handymen</div>
+      <div class="worker-chip"><span class="emoji">🐕</span>Dog Groomers</div>
+      <div class="worker-chip"><span class="emoji">💪</span>Trainers</div>
+      <div class="worker-chip"><span class="emoji">📚</span>Tutors</div>
+      <div class="worker-chip"><span class="emoji">👶</span>Babysitters</div>
+      <div class="worker-chip"><span class="emoji">📸</span>Photographers</div>
+      <div class="worker-chip"><span class="emoji">🚚</span>Movers</div>
+      <div class="worker-chip"><span class="emoji">🔨</span>Contractors</div>
+      <div class="worker-chip"><span class="emoji">🌿</span>Landscapers</div>
+    </div>
+  </div>
+</section>
+
+<!-- FEATURES -->
+<section class="features-bg" style="padding: 80px 24px;">
+  <div style="max-width: 1100px; margin: 0 auto;">
+    <div class="section-label">What you get</div>
+    <h2>Everything you need.<br>Nothing you don't.</h2>
+    <p class="section-sub">No bloated software. No confusing setup. Just the tools that actually make you money.</p>
+    <div class="features-grid">
+      <div class="feature-card">
+        <div class="feature-icon">🔗</div>
+        <h3>Your booking link</h3>
+        <p>One link clients can click to see your availability and book instantly. Put it in your Instagram bio, Kijiji ad, Facebook reply — anywhere you already are.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">💰</div>
+        <h3>Deposits that stick</h3>
+        <p>Require a deposit when clients book. You set the amount — $20, 50%, whatever works. No skin in the game = no-shows. Deposits eliminate them.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">🤒</div>
+        <h3>Sick day AI</h3>
+        <p>Tap "I'm sick today" and Pronto texts all your booked clients automatically. They reschedule themselves. Zero calls. Zero awkward conversations.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">📅</div>
+        <h3>Calendar you control</h3>
+        <p>Block off vacations, personal days, anything. Clients only see real availability. No more double-bookings, no more explaining you're out of town.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">📱</div>
+        <h3>Automatic reminders</h3>
+        <p>Clients get SMS reminders 24 hours and 2 hours before their appointment. Fewer no-shows, more on-time arrivals, less chasing people down.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">⭐</div>
+        <h3>Verified reviews</h3>
+        <p>Only clients who actually booked through Pronto can leave a review. Real social proof that builds trust and wins you new clients automatically.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">🗺️</div>
+        <h3>Mileage tracking</h3>
+        <p>GPS tracks your drives to every client automatically. Tax season becomes a 5-minute job instead of a nightmare. Saves most workers $800+ at tax time.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">📣</div>
+        <h3>Referral system</h3>
+        <p>Give clients a referral link. When they send you a new client, they get a reward you set — discount, free add-on, your choice. Word of mouth, automated.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">📞</div>
+        <h3>AI phone (Pro+)</h3>
+        <p>Forward your missed calls to your Pronto AI. It checks your calendar, books the client, takes a deposit, and sends a confirmation. You never miss a job again.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- HOW IT WORKS -->
+<section style="padding: 80px 24px; background: var(--bg);">
+  <div style="max-width: 860px; margin: 0 auto;">
+    <div class="section-label">How it works</div>
+    <h2>Live in 5 minutes.</h2>
+    <p class="section-sub" style="margin-bottom: 56px;">No tech skills needed. If you can fill out a form, you can set up Pronto.</p>
+    <div class="steps">
+      <div class="step">
+        <div class="step-num">1</div>
+        <h3>Create your profile</h3>
+        <p>Add your name, photo, services, prices, and when you're available. Takes about 5 minutes.</p>
+      </div>
+      <div class="step">
+        <div class="step-num">2</div>
+        <h3>Share your link</h3>
+        <p>You get a link like <strong>getpronto.app/sarah</strong>. Put it everywhere — Instagram bio, Kijiji, Facebook, texts to clients.</p>
+      </div>
+      <div class="step">
+        <div class="step-num">3</div>
+        <h3>Clients book themselves</h3>
+        <p>They pick a time, pay a deposit, and get a confirmation. You get a notification. No back-and-forth needed.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PRICING -->
+<section class="pricing-bg" style="padding: 80px 24px;">
+  <div style="max-width: 1100px; margin: 0 auto;">
+    <div class="section-label">Pricing</div>
+    <h2>Simple, honest pricing.</h2>
+    <p class="section-sub">No commissions. No surprise fees. No "per transaction" cuts. You keep everything you earn.</p>
+    <div class="pricing-grid">
+      <div class="pricing-card">
+        <div class="price-label">Free</div>
+        <div class="price-amount"><sup>$</sup>0<sub>/mo</sub></div>
+        <div class="price-desc">Get started, see if you love it.</div>
+        <ul class="price-features">
+          <li>Up to 10 bookings/month</li>
+          <li>Public booking link</li>
+          <li>Basic profile</li>
+          <li>SMS reminders</li>
+          <li>Verified reviews</li>
+        </ul>
+      </div>
+      <div class="pricing-card popular">
+        <div class="popular-badge">Most Popular</div>
+        <div class="price-label">Pro</div>
+        <div class="price-amount"><sup>$</sup>29<sub>/mo</sub></div>
+        <div class="price-desc">For workers who are serious about growth.</div>
+        <ul class="price-features">
+          <li>Unlimited bookings</li>
+          <li>Deposit collection</li>
+          <li>Sick day AI rescheduling</li>
+          <li>Mileage tracking (GPS)</li>
+          <li>Referral system</li>
+          <li>Client history & rebooking</li>
+          <li>One-tap invoicing</li>
+          <li>Vacation blocking</li>
+        </ul>
+      </div>
+      <div class="pricing-card">
+        <div class="price-label">Pro+</div>
+        <div class="price-amount"><sup>$</sup>49<sub>/mo</sub></div>
+        <div class="price-desc">Everything in Pro, plus AI that answers your phone.</div>
+        <ul class="price-features">
+          <li>Everything in Pro</li>
+          <li>AI phone answering</li>
+          <li>Forward missed calls to AI</li>
+          <li>AI books & takes deposits</li>
+          <li>Keep your existing number</li>
+        </ul>
+      </div>
+    </div>
+    <p style="text-align:center; margin-top:28px; font-size:14px; color: var(--text-light);">Early access members get Pro free for 3 months. No credit card until you decide to stay.</p>
+  </div>
+</section>
+
+<!-- FINAL CTA -->
+<section class="cta-section">
+  <h2>Stop losing clients to a text thread.</h2>
+  <p>Join the waitlist. Be first when we launch.</p>
+  <div class="cta-form">
+    <input type="email" id="cta-email" placeholder="your@email.com" />
+    <button class="btn-cta" onclick="joinCTA()">Get Early Access</button>
+  </div>
+  <p style="margin-top:16px; font-size:13px; opacity:0.6;">Free forever for the first 100 spots.</p>
+</section>
+
+<footer>
+  <p>&copy; 2026 Pronto. Built in Calgary, Canada. &nbsp;|&nbsp; <a href="mailto:hello@getpronto.app">hello@getpronto.app</a></p>
+</footer>
+
+<script>
+  const SERVER = "https://ai-receptionist-production-57a6.up.railway.app";
+
+  async function submitWaitlist(name, email, serviceType) {
+    try {
+      await fetch(SERVER + "/pronto/waitlist", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ name, email, serviceType })
+      });
+    } catch (e) {
+      // fail silently — user still sees success
+    }
+    document.getElementById("waitlist-form").style.display = "none";
+    document.getElementById("success-state").style.display = "block";
+  }
+
+  function joinWaitlist() {
+    const name = document.getElementById("wl-name").value.trim();
+    const email = document.getElementById("wl-email").value.trim();
+    const serviceType = document.getElementById("wl-type").value;
+    if (!email || !email.includes("@")) { alert("Please enter your email address."); return; }
+    if (!name) { alert("Please enter your name."); return; }
+    submitWaitlist(name, email, serviceType);
+  }
+
+  function joinCTA() {
+    const email = document.getElementById("cta-email").value.trim();
+    if (!email || !email.includes("@")) { alert("Please enter your email address."); return; }
+    submitWaitlist("", email, "");
+    document.querySelector(".cta-form").innerHTML = '<p style="font-size:18px; font-weight:700;">You\'re on the list! 🎉</p>';
+  }
+
+  // Enter key on form inputs
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "Enter" && document.activeElement.closest("#waitlist-form")) joinWaitlist();
+  });
+</script>
+
+</body>
+</html>
