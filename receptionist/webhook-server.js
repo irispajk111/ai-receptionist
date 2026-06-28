@@ -14,6 +14,10 @@ app.post("/trial/signup", async (req, res) => {
     const lead = { ...req.body, id: `trial_${Date.now()}`, status: "pending", createdAt: new Date().toISOString() };
     db.saveClient(lead);
     console.log(`NEW TRIAL SIGNUP: ${lead.businessName} — ${lead.email} — ${lead.phone}`);
+    await sendSMS(
+      "+14034397770",
+      `NEW SIGNUP! ${lead.businessName}\nOwner: ${lead.ownerName}\nEmail: ${lead.email}\nPhone: ${lead.phone}`
+    );
     res.json({ ok: true });
   } catch (e) {
     res.json({ ok: true }); // always succeed so user sees confirmation
